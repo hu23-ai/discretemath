@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>진법 연산기</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="operate.js" defer></script>
+</head>
+<body>
+
+  <!-- 상단 내비게이션 -->
+  <nav>
+    <a href="index.html">🏠 메인</a>
+    <a href="convert.html">진법 변환기</a>
+    <a href="operate.html">진법 연산기</a>
+    <a href="modular.html">모듈러 연산기</a>
+  </nav>
+
+  <!-- 햄버거 버튼 -->
+  <div id="hamburgerBtn" onclick="toggleHistory()">☰</div>
+
+  <h1>진법 연산기</h1>
+
+  <!-- 연산기 입력 영역 -->
+  <div>
+    <input type="text" id="numA" placeholder="숫자 A">
+    <select id="op">
+      <option value="add">+</option>
+      <option value="sub">−</option>
+      <option value="mul">×</option>
+    </select>
+    <input type="text" id="numB" placeholder="숫자 B">
+    <br><br>
+
+    <label>진법 선택:
+      <select id="operationBase"></select>
+    </label>
+    <br><br>
+
+    <button onclick="handleOperate()">계산</button>
+    <p id="operationResult"></p>
+  </div>
+
+  <!-- 사이드 기록 패널 -->
+  <aside id="historyPanel">
+    <h3>📜 계산 기록</h3>
+    <ul id="historyList"></ul>
+    <button onclick="clearHistory()">기록 지우기</button>
+  </aside>
+
+</body>
+</html>
