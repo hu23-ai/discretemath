@@ -1,51 +1,51 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>진법 연산기</title>
+  <title>Base Arithmetic</title>
   <link rel="stylesheet" href="style.css">
   <script src="operate.js" defer></script>
 </head>
 <body>
 
-  <!-- 상단 내비게이션 -->
+  <!-- Top Navigation -->
   <nav>
-    <a href="index.html">🏠 메인</a>
-    <a href="convert.html">진법 변환기</a>
-    <a href="operate.html">진법 연산기</a>
-    <a href="modular.html">모듈러 연산기</a>
+    <a href="index.html">🏠 Main</a>
+    <a href="convert.html">Base Converter</a>
+    <a href="operate.html">Base Arithmetic</a>
+    <a href="modular.html">Modular Arithmetic</a>
   </nav>
 
-  <!-- 햄버거 버튼 -->
+  <!-- Hamburger Button -->
   <div id="hamburgerBtn" onclick="toggleHistory()">☰</div>
 
-  <h1>진법 연산기</h1>
+  <h1>Base Arithmetic</h1>
 
-  <!-- 연산기 입력 영역 -->
+  <!-- Calculator Input Area -->
   <div>
-    <input type="text" id="numA" placeholder="숫자 A">
+    <input type="text" id="numA" placeholder="Number A">
     <select id="op">
       <option value="add">+</option>
       <option value="sub">−</option>
       <option value="mul">×</option>
     </select>
-    <input type="text" id="numB" placeholder="숫자 B">
+    <input type="text" id="numB" placeholder="Number B">
     <br><br>
 
-    <label>진법 선택:
+    <label>Select Base:
       <select id="operationBase"></select>
     </label>
     <br><br>
 
-    <button onclick="handleOperate()">계산</button>
+    <button onclick="handleOperate()">Calculate</button>
     <p id="operationResult"></p>
   </div>
 
-  <!-- 사이드 기록 패널 -->
+  <!-- Side History Panel -->
   <aside id="historyPanel">
-    <h3>📜 계산 기록</h3>
+    <h3>📜 Calculation History</h3>
     <ul id="historyList"></ul>
-    <button onclick="clearHistory()">기록 지우기</button>
+    <button onclick="clearHistory()">Clear History</button>
   </aside>
 
 </body>

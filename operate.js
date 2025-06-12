@@ -3,7 +3,7 @@ const digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 function populateBaseSelect() {
   const baseSelect = document.getElementById("operationBase");
   for (let i = 2; i <= 36; i++) {
-    baseSelect.innerHTML += `<option value="${i}">${i}진수</option>`;
+    baseSelect.innerHTML += `<option value="${i}">Base ${i}</option>`;
   }
   baseSelect.value = 10;
 }
@@ -14,7 +14,7 @@ function baseNtoDecimal(str, base) {
   for (let i = 0; i < str.length; i++) {
     const val = digits.indexOf(str[i]);
     if (val === -1 || val >= base) {
-      throw new Error(`'${str[i]}'는 ${base}진법에 유효하지 않습니다.`);
+      throw new Error(`'${str[i]}' is not valid in base ${base}.`);
     }
     result = result * base + val;
   }
@@ -42,7 +42,7 @@ function handleOperate() {
   const resultField = document.getElementById("operationResult");
 
   try {
-    if (!A || !B) throw new Error("두 숫자를 모두 입력해주세요.");
+    if (!A || !B) throw new Error("Please enter both numbers.");
     const decA = baseNtoDecimal(A, base);
     const decB = baseNtoDecimal(B, base);
 
@@ -52,13 +52,13 @@ function handleOperate() {
     else if (op === "mul") result = decA * decB;
 
     const final = decimalToBaseN(result, base);
-    const expr = `${A} ${opSymbol(op)} ${B} (in ${base}진법)`;
+    const expr = `${A} ${opSymbol(op)} ${B} (in base ${base})`;
     resultField.textContent = `${expr} = ${final}`;
     resultField.style.color = "black";
 
-    saveToHistory(expr, final); // 기록 저장
+    saveToHistory(expr, final); 
   } catch (e) {
-    resultField.textContent = "오류: " + e.message;
+    resultField.textContent = "Error: " + e.message;
     resultField.style.color = "red";
   }
 }
@@ -67,7 +67,7 @@ function opSymbol(op) {
   return { add: "+", sub: "−", mul: "×" }[op];
 }
 
-// 공통 기록 관리
+
 function saveToHistory(expression, result) {
   const record = `${expression} = ${result}`;
   let history = JSON.parse(localStorage.getItem("calcHistory")) || [];

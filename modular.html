@@ -1,31 +1,31 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>모듈러 연산기</title>
+  <title>Modular Arithmetic</title>
   <link rel="stylesheet" href="style.css" />
   <script src="modular.js" defer></script>
 </head>
 <body>
 
   <nav>
-    <a href="index.html">🏠 메인</a>
-    <a href="convert.html">진법 변환기</a>
-    <a href="operate.html">진법 연산기</a>
-    <a href="modular.html">모듈러 연산기</a>
+    <a href="index.html">🏠 Main</a>
+    <a href="convert.html">Base Converter</a>
+    <a href="operate.html">Base Arithmetic</a>
+    <a href="modular.html">Modular Arithmetic</a>
   </nav>
 
   <div id="hamburgerBtn" onclick="toggleHistory()">☰</div>
 
-  <h1>모듈러 연산기</h1>
+  <h1>Modular Arithmetic</h1>
 
   <div>
-    <label>A: <input type="number" id="a" placeholder="예: 3" /></label>
-    <label id="bContainer">B: <input type="number" id="b" placeholder="예: 4" /></label>
-    <label>mod M: <input type="number" id="m" placeholder="예: 5" /></label>
+    <label>A: <input type="number" id="a" placeholder="e.g. 3" /></label>
+    <label id="bContainer">B: <input type="number" id="b" placeholder="e.g. 4" /></label>
+    <label>mod M: <input type="number" id="m" placeholder="e.g. 5" /></label>
     <br /><br />
     <label>
-      연산 선택:
+      Select Operation:
       <select id="modOp" onchange="updateInputVisibility()">
         <option value="add">A + B mod M</option>
         <option value="mul">A × B mod M</option>
@@ -33,16 +33,16 @@
       </select>
     </label>
     <br /><br />
-    <button onclick="handleModular()">계산</button>
+    <button onclick="handleModular()">Calculate</button>
     <p id="preview" style="font-style: italic;"></p>
     <p id="modResult"></p>
     <pre id="modProcess" style="text-align:left; margin:auto; max-width:400px; font-size:14px; color:#555;"></pre>
   </div>
 
   <aside id="historyPanel">
-    <h3>📜 계산 기록</h3>
+    <h3>📜 Calculation History</h3>
     <ul id="historyList"></ul>
-    <button onclick="clearHistory()">기록 지우기</button>
+    <button onclick="clearHistory()">Clear History</button>
   </aside>
 
 </body>

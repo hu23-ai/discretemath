@@ -4,7 +4,7 @@ function populateBaseOptions() {
   const fromBase = document.getElementById("fromBase");
   const toBase = document.getElementById("toBase");
   for (let i = 2; i <= 36; i++) {
-    const option = `<option value="${i}">${i}진수</option>`;
+    const option = `<option value="${i}">Base ${i}</option>`;
     fromBase.innerHTML += option;
     toBase.innerHTML += option;
   }
@@ -18,7 +18,7 @@ function baseNtoDecimal(str, base) {
   for (let i = 0; i < str.length; i++) {
     const val = digits.indexOf(str[i]);
     if (val === -1 || val >= base) {
-      throw new Error(`'${str[i]}'는 ${base}진법에 유효하지 않습니다.`);
+      throw new Error(`'${str[i]}' is not valid in base ${base}.`);
     }
     result = result * base + val;
   }
@@ -45,10 +45,10 @@ function handleConvert() {
   const resultElement = document.getElementById("result");
 
   try {
-    if (input === "") throw new Error("입력값이 없습니다.");
+    if (input === "") throw new Error("No input value.");
     const decimal = baseNtoDecimal(input, fromBase);
     const converted = decimalToBaseN(decimal, toBase);
-    const expression = `${input} (${fromBase}진수) → (${toBase}진수)`;
+    const expression = `${input} (Base ${fromBase}) → (Base ${toBase})`;
     const result = converted;
 
     resultElement.textContent = `${expression} = ${result}`;
@@ -56,18 +56,18 @@ function handleConvert() {
 
     saveToHistory(expression, result);
   } catch (e) {
-    resultElement.textContent = `오류: ${e.message}`;
+    resultElement.textContent = `Error: ${e.message}`;
     resultElement.style.color = "red";
   }
 }
 
-// 자주 쓰는 진법 변환 preset 버튼
+// Preset buttons for common base conversions
 function setPreset(from, to) {
   document.getElementById("fromBase").value = from;
   document.getElementById("toBase").value = to;
 }
 
-// 기록 관련 함수들
+// History functions
 function saveToHistory(expression, result) {
   const record = `${expression} = ${result}`;
   let history = JSON.parse(localStorage.getItem("calcHistory")) || [];

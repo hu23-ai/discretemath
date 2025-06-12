@@ -1,3 +1,7 @@
+function mod(n, m) {
+  return ((n % m) + m) % m;
+}
+
 function updateInputVisibility() {
   const op = document.getElementById("modOp").value;
   const bContainer = document.getElementById("bContainer");
@@ -13,9 +17,9 @@ function updateInputVisibility() {
   const bVal = document.getElementById("b").value || "B";
   const mVal = document.getElementById("m").value || "M";
 
-  if (op === "add") preview.textContent = `계산식: (${aVal} + ${bVal}) mod ${mVal}`;
-  else if (op === "mul") preview.textContent = `계산식: (${aVal} × ${bVal}) mod ${mVal}`;
-  else if (op === "inv") preview.textContent = `계산식: ${aVal}⁻¹ mod ${mVal}`;
+  if (op === "add") preview.textContent = `Expression: (${aVal} + ${bVal}) mod ${mVal}`;
+  else if (op === "mul") preview.textContent = `Expression: (${aVal} × ${bVal}) mod ${mVal}`;
+  else if (op === "inv") preview.textContent = `Expression: ${aVal}⁻¹ mod ${mVal}`;
 }
 
 function handleModular() {
@@ -28,35 +32,35 @@ function handleModular() {
 
   try {
     if (isNaN(a) || isNaN(m) || (op !== "inv" && isNaN(b))) {
-      throw new Error("입력값이 부족하거나 잘못되었습니다.");
+      throw new Error("Input is missing or invalid.");
     }
-    if (m <= 0) throw new Error("mod M은 양의 정수여야 합니다.");
+    if (m <= 0) throw new Error("mod M must be a positive integer.");
 
     let result;
     let expression;
     let process = "";
 
     if (op === "add") {
-      result = (a + b) % m;
+      result = mod(a + b, m);
       expression = `(${a} + ${b}) mod ${m}`;
     } else if (op === "mul") {
-      result = (a * b) % m;
+      result = mod(a * b, m);
       expression = `(${a} × ${b}) mod ${m}`;
     } else if (op === "inv") {
-      const { inverse, steps } = modInverseWithSteps(a, m);
-      if (inverse === null) throw new Error("역원이 존재하지 않습니다.");
+      const { inverse, steps } = modInverseWithSteps(mod(a, m), m);
+      if (inverse === null) throw new Error("No modular inverse exists.");
       result = inverse;
       expression = `${a}⁻¹ mod ${m}`;
-      process = steps.join("\n") + `\n⇒ 결과: ${a}⁻¹ mod ${m} = ${inverse}`;
+      process = steps.join("\n") + `\n⇒ Result: ${a}⁻¹ mod ${m} = ${inverse}`;
     }
 
-    resultField.textContent = `결과: ${result}`;
+    resultField.textContent = `Result: ${result}`;
     resultField.style.color = "black";
     processField.textContent = op === "inv" ? process : "";
 
     saveToHistory(expression, result);
   } catch (e) {
-    resultField.textContent = "오류: " + e.message;
+    resultField.textContent = "Error: " + e.message;
     resultField.style.color = "red";
     document.getElementById("modProcess").textContent = "";
   }
@@ -69,7 +73,7 @@ function modInverseWithSteps(a, m) {
   let steps = [];
   let origA = a, origM = m;
 
-  if (m === 1) return { inverse: 0, steps: ["M = 1일 때는 역원이 정의되지 않습니다."] };
+  if (m === 1) return { inverse: 0, steps: ["No modular inverse when M = 1."] };
 
   while (a > 1) {
     const q = Math.floor(a / m);
@@ -78,13 +82,13 @@ function modInverseWithSteps(a, m) {
     [x0, x1] = [x1 - q * x0, x0];
   }
 
-  if (a !== 1) return { inverse: null, steps: ["gcd ≠ 1 → 역원 없음"] };
+  if (a !== 1) return { inverse: null, steps: ["gcd ≠ 1 → No modular inverse"] };
   if (x1 < 0) x1 += m0;
 
   return { inverse: x1, steps };
 }
 
-// 기록 기능 공통
+// History functions
 function toggleHistory() {
   document.getElementById("historyPanel").classList.toggle("open");
 }

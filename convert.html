@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>진법 변환기</title>
+  <title>Base Converter</title>
   <link rel="stylesheet" href="style.css" />
   <script src="convert.js" defer></script>
 </head>
 <body>
 
   <nav>
-    <a href="index.html">🏠 메인</a>
-    <a href="convert.html">진법 변환기</a>
-    <a href="operate.html">진법 연산기</a>
-    <a href="modular.html">모듈러 연산기</a>
+    <a href="index.html">🏠 Main</a>
+    <a href="convert.html">Base Converter</a>
+    <a href="operate.html">Base Arithmetic</a>
+    <a href="modular.html">Modular Arithmetic</a>
   </nav>
 
   <div id="hamburgerBtn" onclick="toggleHistory()">☰</div>
 
-  <h1>진법 변환기</h1>
+  <h1>Base Converter</h1>
 
   <div>
-    <input type="text" id="inputNumber" placeholder="숫자 입력" />
+    <input type="text" id="inputNumber" placeholder="Enter number" />
     <br /><br />
     <label>From:
       <select id="fromBase"></select>
@@ -30,7 +30,7 @@
     </label>
 
     <div id="quickPresetsArea">
-      <p style="font-size: 14px; color: #555; margin-bottom: 5px;">자주 사용하는 진법 조합을 한 번에 설정해보세요:</p>
+      <p style="font-size: 14px; color: #555; margin-bottom: 5px;">Quickly set commonly used base conversions:</p>
       <div id="quickPresets">
         <span onclick="setPreset(10, 2)">10 → 2</span>
         <span onclick="setPreset(2, 10)">2 → 10</span>
@@ -40,16 +40,16 @@
     </div>
 
     <br />
-    <button onclick="handleConvert()">변환</button>
+    <button onclick="handleConvert()">Convert</button>
   </div>
 
   <p id="result"></p>
   <pre id="process" style="text-align:left; margin:auto; max-width:400px; font-size:14px; color:#555;"></pre>
 
   <aside id="historyPanel">
-    <h3>📜 계산 기록</h3>
+    <h3>📜 Calculation History</h3>
     <ul id="historyList"></ul>
-    <button onclick="clearHistory()">기록 지우기</button>
+    <button onclick="clearHistory()">Clear History</button>
   </aside>
 
 </body>
